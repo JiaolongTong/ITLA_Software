@@ -37,38 +37,19 @@ int read_ADvalue(char * device_name, float *value){
 int main(int argc ,char ** argv){
 
         float ad_value;
+        int fd = open("./dat.txt",O_RDWR|O_CREAT|O_TRUNC);
+	char buf[20]; 																											
+        if(fd<0)return -1;
+        else{
+		lseek(fd,0,SEEK_SET);
+	}
         while(1){
-           /**/
-           
-           printf("<-----Start Scaning AD chanel------>\n");
+           /**/          
+           //printf("<-----Start Scaning AD chanel------>\n");
            read_ADvalue("in_voltage0_raw",&ad_value);
-           usleep(1000);
-           printf("AIN0 value: %f\n",ad_value);
-	   read_ADvalue("in_voltage1_raw",&ad_value);
-           usleep(1000);
-           printf("AIN1 value: %f\n",ad_value);
-	   read_ADvalue("in_voltage2_raw",&ad_value);
-           usleep(1000);
-           printf("AIN2 value: %f\n",ad_value);
-	   read_ADvalue("in_voltage3_raw",&ad_value);
-           usleep(1000);
-           printf("AIN3 value: %f\n",ad_value);
-	   read_ADvalue("in_voltage4_raw",&ad_value);
-           usleep(1000);
-           printf("AIN4 value: %f\n",ad_value);
-	   read_ADvalue("in_voltage5_raw",&ad_value);
-           usleep(1000);
-           printf("AIN5 value: %f\n",ad_value);
-	   read_ADvalue("in_voltage6_raw",&ad_value);
-           usleep(1000);
-           printf("AIN6 value: %f\n",ad_value);
-
-/*
-	   read_ADvalue("in_voltage7_raw",&ad_value);
-           //usleep(1000);
-           printf("AIN7 value: %f\n",ad_value);
-*/
-           sleep(1);
+           sprintf(buf,"%f\n",ad_value);
+	   write(fd,buf,strlen(buf));
+           //usleep(2);
         }
         return 0;
 }

@@ -147,8 +147,8 @@ int main(int argc ,char ** argv){
 					     enalbeOutput(ctx);
 					     Freq_G = getLaserFrequency(ctx);
                                              PWR = getOpticalOutputPower(ctx);
-                                             read_ADvalue("in_voltage4_raw",&ad_value);
-                                             data[index].laser_adpower       = sin_test_array[chanel-1];//ad_value;
+                                             read_ADvalue("in_voltage0_raw",&ad_value);
+                                             data[index].laser_adpower       = ad_value;   //sin_test_array[chanel-1]
                                              data[index].laser_outpower      = PWR;
                                              data[index].laser_chanel        = chanel;
                                              data[index].laser_wavelength    = FrequencyG_to_Wavelength(Freq_G);
